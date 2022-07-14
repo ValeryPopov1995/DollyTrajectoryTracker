@@ -13,6 +13,7 @@ public class DollyTracker : MonoBehaviour
     [SerializeField] CinemachineSmoothPath path;
 
     private Coroutine trackingCoroutine;
+    private GameObject tempPathGameobject;
 
     /// <summary>
     /// Запускает корутину движения трекера по траектории с заданной скоростью
@@ -21,15 +22,23 @@ public class DollyTracker : MonoBehaviour
     /// <param name="path">путь движения трекера, если null, то использует путь, указанный в своих настройках</param>
     /// <param name="moveSpeed">скорость движения трекера</param>
     /// <param name="usePathOrientation">вращать трекер по скрученности указанного пути, задается в CinemachineSmoothPath > Waypoints > Roll</param>
-    public void StartTracking(bool createPathCopy = true, CinemachineSmoothPath path = null, float moveSpeed = 1, bool usePathOrientation = true)
+    public void StartTracking(CinemachineSmoothPath path = null, float moveSpeed = 1, bool createPathCopy = true, bool usePathOrientation = true)
     {
-        if (trackingCoroutine != null) StopAllCoroutines();
+        if (trackingCoroutine != null)
+        {
+            StopAllCoroutines();
+            trackingCoroutine = null;
+
+            if (tempPathGameobject)
+                Destroy(tempPathGameobject);
+        }
         trackingCoroutine = StartCoroutine(TrackingCoroutine(path ? path : this.path, moveSpeed, createPathCopy, usePathOrientation));
     }
 
     private IEnumerator TrackingCoroutine(CinemachineSmoothPath path, float moveSpeed, bool createPathCopy, bool usePathOrientation)
     {
         CinemachineSmoothPath tempPath = createPathCopy ? Instantiate(path) : path;
+        if (createPathCopy) tempPathGameobject = tempPath.gameObject;
 
         float pathByFixedSpeed = moveSpeed * Time.fixedDeltaTime;
         float trackCurrentPosition = 0;
