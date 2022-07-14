@@ -1,3 +1,7 @@
+
+
+https://user-images.githubusercontent.com/72905449/178983008-cc131adb-aadb-4b23-bf79-6afdfb850cd5.mp4
+
 ![trajectory shaded](https://user-images.githubusercontent.com/72905449/178972331-1fbe5d62-0c5f-473d-aaf6-936bd5c20e02.PNG)
 ![trajectory framed](https://user-images.githubusercontent.com/72905449/178971972-058a77cf-0b3d-4fe9-8131-becaa41898a7.PNG)
 # Dolly Trajectory and Tracker
