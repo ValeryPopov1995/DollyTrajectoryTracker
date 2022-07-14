@@ -3,10 +3,9 @@ using UnityEngine;
 
 public class DollyTrajectory : MonoBehaviour
 {
-    public bool IsImpact
-    {
-        get; private set;
-    }
+    public bool IsImpact { get; private set; }
+
+    public CinemachineSmoothPath Path => path;
 
     [SerializeField] CinemachineSmoothPath path;
     [SerializeField] LineRenderer line;
